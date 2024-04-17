@@ -3,7 +3,16 @@
 
 #[macro_use]
 extern crate lazy_static;
+use steamworks::Client;
+use anyhow::Context;
+
+mod steam;
 
 fn main() {
     app_lib::run();
+
+	// tests
+	let (client, sclient) = Client::init().context("Failed to initialize Steam client");
+	steam::verify_dayz_copy(client);
+	steam::get_dayz_friends_dayz(client);
 }
